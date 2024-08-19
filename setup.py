@@ -3,7 +3,7 @@ import sys
 from setuptools import find_packages, setup
 
 NAME = "llm_server"
-VERSION = "1.0.0"
+VERSION = "0.0.1"
 
 # To install the library, run the following
 #
@@ -30,7 +30,5 @@ setup(
     package_data={"": ["openapi/openapi.yaml"]},
     include_package_data=True,
     entry_points={"console_scripts": ["llm_server=llm_server.__main__:main"]},
-    long_description="""\
-    A server that performs queries on LLMs.
-    """,
+    long_description="A server that performs queries on LLMs.",
 )

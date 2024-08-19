@@ -1,6 +1,7 @@
 aiohttp_jinja2 == 1.5.0
 black
 connexion[aiohttp,swagger-ui] >= 2.6.0, <3
+Flask < 2.3
 isort
 litgpt
 pyupgrade

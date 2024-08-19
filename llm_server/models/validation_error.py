@@ -3,7 +3,7 @@ from typing import Dict, List, Type
 
 from llm_server import util
 from llm_server.models.base_model import Model
-from llm_server.models.validation_error_loc_inner import ValidationErrorLocInner
+from llm_server.models.location_inner import LocationInner
 
 
 class ValidationError(Model):
@@ -12,14 +12,14 @@ class ValidationError(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, loc: List[ValidationErrorLocInner] = None, msg: str = None, type: str = None):
+    def __init__(self, loc: List[LocationInner] = None, msg: str = None, type: str = None):
         """ValidationError - a model defined in OpenAPI
 
         :param loc: The loc of this ValidationError.
         :param msg: The msg of this ValidationError.
         :param type: The type of this ValidationError.
         """
-        self.openapi_types = {"loc": List[ValidationErrorLocInner], "msg": str, "type": str}
+        self.openapi_types = {"loc": List[LocationInner], "msg": str, "type": str}
 
         self.attribute_map = {"loc": "loc", "msg": "msg", "type": "type"}
 
@@ -42,7 +42,7 @@ class ValidationError(Model):
 
 
         :return: The loc of this ValidationError.
-        :rtype: List[ValidationErrorLocInner]
+        :rtype: List[LocationInner]
         """
         return self._loc
 
@@ -52,7 +52,7 @@ class ValidationError(Model):
 
 
         :param loc: The loc of this ValidationError.
-        :type loc: List[ValidationErrorLocInner]
+        :type loc: List[LocationInner]
         """
         if loc is None:
             raise ValueError("Invalid value for `loc`, must not be `None`")
