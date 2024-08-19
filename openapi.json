@@ -1,0 +1,145 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "FastAPI",
+        "version": "0.1.0"
+    },
+    "paths": {
+        "/movie_summary": {
+            "post": {
+                "summary": "Movie Summary",
+                "operationId": "movie_summary_movie_summary_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MovieReview"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MovieSummary"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "HTTPValidationError": {
+                "properties": {
+                    "detail": {
+                        "items": {
+                            "$ref": "#/components/schemas/ValidationError"
+                        },
+                        "type": "array",
+                        "title": "Detail"
+                    }
+                },
+                "type": "object",
+                "title": "HTTPValidationError"
+            },
+            "MovieReview": {
+                "properties": {
+                    "review": {
+                        "type": "string",
+                        "title": "Review"
+                    },
+                    "reviewer": {
+                        "type": "string",
+                        "title": "Reviewer"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "review",
+                    "reviewer"
+                ],
+                "title": "MovieReview"
+            },
+            "MovieSummary": {
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "title": "Title"
+                    },
+                    "summary": {
+                        "type": "string",
+                        "title": "Summary"
+                    },
+                    "grade": {
+                        "type": "integer",
+                        "maximum": 5,
+                        "minimum": 0,
+                        "title": "Grade"
+                    },
+                    "reviewer": {
+                        "type": "string",
+                        "title": "Reviewer"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "title",
+                    "summary",
+                    "grade",
+                    "reviewer"
+                ],
+                "title": "MovieSummary"
+            },
+            "ValidationError": {
+                "properties": {
+                    "loc": {
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ]
+                        },
+                        "type": "array",
+                        "title": "Location"
+                    },
+                    "msg": {
+                        "type": "string",
+                        "title": "Message"
+                    },
+                    "type": {
+                        "type": "string",
+                        "title": "Error Type"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "loc",
+                    "msg",
+                    "type"
+                ],
+                "title": "ValidationError"
+            }
+        }
+    }
+}

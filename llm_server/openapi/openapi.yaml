@@ -1,0 +1,126 @@
+openapi: 3.1.0
+info:
+  title: FastAPI
+  version: 0.1.0
+servers:
+- url: /
+paths:
+  /movie_summary:
+    post:
+      operationId: movie_summary_movie_summary_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MovieReview'
+        required: true
+        x-body-name: body
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MovieSummary'
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Movie Summary
+      x-openapi-router-controller: llm_server.controllers.default_controller
+      x-codegen-request-body-name: body
+components:
+  schemas:
+    HTTPValidationError:
+      example:
+        detail:
+        - msg: msg
+          loc:
+          - ValidationError_loc_inner
+          - ValidationError_loc_inner
+          type: type
+        - msg: msg
+          loc:
+          - ValidationError_loc_inner
+          - ValidationError_loc_inner
+          type: type
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          title: detail
+          type: array
+      title: HTTPValidationError
+    MovieReview:
+      example:
+        review: review
+        reviewer: reviewer
+      properties:
+        review:
+          title: Review
+          type: string
+        reviewer:
+          title: Reviewer
+          type: string
+      required:
+      - review
+      - reviewer
+      title: MovieReview
+    MovieSummary:
+      example:
+        summary: summary
+        grade: 0
+        reviewer: reviewer
+        title: title
+      properties:
+        title:
+          title: Title
+          type: string
+        summary:
+          title: Summary
+          type: string
+        grade:
+          maximum: 5
+          minimum: 0
+          title: Grade
+          type: integer
+        reviewer:
+          title: Reviewer
+          type: string
+      required:
+      - grade
+      - reviewer
+      - summary
+      - title
+      title: MovieSummary
+    ValidationError:
+      example:
+        msg: msg
+        loc:
+        - ValidationError_loc_inner
+        - ValidationError_loc_inner
+        type: type
+      properties:
+        loc:
+          items:
+            $ref: '#/components/schemas/ValidationError_loc_inner'
+          title: loc
+          type: array
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ValidationError_loc_inner:
+      anyOf:
+      - type: string
+      - type: integer
+      title: ValidationError_loc_inner
